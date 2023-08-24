@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="h-screen">
+      <nav className="border-b-2">
+        <h1 className="text-3xl text-center">Seth Burns</h1>
+      </nav>
+      <main className='h-full w-screen'>
+        <video
+          src='./WolfEelBackground.mp4'
+          className="object-cover object-center h-full w-screen"
+          autoPlay
+          loop
+          muted
+        />
+      </main>
     </div>
   );
 }
