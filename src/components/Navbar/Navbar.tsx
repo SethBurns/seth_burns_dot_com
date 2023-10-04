@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { BiMenuAltRight } from 'react-icons/bi';
 // import { MobileNavBar } from './MobileNavBar';
@@ -6,9 +6,12 @@ import { BiMenuAltRight } from 'react-icons/bi';
 
 export function Navbar() {
   
+  const [navColor, setNavColor] = useState('#ffffff');
 
   return (
-    <nav className="flex flex-row justify-around items-center">
+    <nav 
+    style={{backgroundColor: `${navColor}`}}
+    className="flex flex-row justify-around items-center w-full z-10">
       <h1 className="text-3xl p-2 m-4 whitespace-nowrap">Seth Burns</h1>
       <div className="flex-row items-center gap-4 justify-center hidden lg:flex">
         {[

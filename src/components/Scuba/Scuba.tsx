@@ -2,7 +2,7 @@ export function Scuba() {
   return (
     <video
             src="./assets/WolfEelBackground.mp4"
-            className="object-cover object-center h-full w-screen brightness-75 bg-fixed"
+            className="bg-contain brightness-75 -z-10"
             autoPlay
             loop
             muted

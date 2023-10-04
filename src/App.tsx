@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 function App() {
   const [scrollValue, setScrollValue] = useState(0);
   const [height, setHeight] = useState(0);
+  const [page, setPage] = useState('About');
 
   useEffect(() => {
     const scrollHandler = () => {
@@ -30,7 +31,7 @@ function App() {
   return (
     <div className="h-screen w-screen font-syne">
       <Navbar />
-      <main className="h-full w-screen">
+      <main className="h-screen w-screen">
         <Routes>
           <Route
             path="/"

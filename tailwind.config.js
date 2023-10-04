@@ -5,6 +5,9 @@ module.exports = {
     './node_modules/tw-elements/dist/js/**/*.js',
   ],
   theme: {
+    colors: {
+      transparentWhite: '#555fff9c',
+    },
     fontFamily: {
       syne: ['Syne', 'sans-serif']
     },
