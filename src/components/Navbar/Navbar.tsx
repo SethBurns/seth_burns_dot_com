@@ -1,41 +1,32 @@
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { BiMenuAltRight } from 'react-icons/bi';
+// import { MobileNavBar } from './MobileNavBar';
+
 
 export function Navbar() {
+  
+
   return (
-    <nav className="border-b-2 flex flex-col justify-center">
-        <h1 className="text-3xl text-center">Seth Burns</h1>
-        <div className="flex justify-center">
-          <NavLink to="/">
-            <button className="border-2 border-black p-2 m-4 w-20 rounded-lg hover:bg-red-500 active:bg-red-600 focus:bg-red-600 focus:ring focus:ring-green-500">
-              About
-            </button>
+    <nav className="flex flex-row justify-around items-center">
+      <h1 className="text-3xl p-2 m-4 whitespace-nowrap">Seth Burns</h1>
+      <div className="flex-row items-center gap-4 justify-center hidden lg:flex">
+        {[
+          ['About', '/'],
+          ['Projects', '/Projects'],
+          ['Contact', '/Contact'],
+          ['Scuba', '/Scuba'],
+          ['Videos', '/Videos'],
+          ['Music', '/Music'],
+        ].map(([title, path]) => (
+          <NavLink to={path} key={title}>
+            <button data-replace={`${title}`} className={`p-2 m-4 w-20 rounded-lg linkhover`}><span>{title}</span></button>
           </NavLink>
-          <NavLink to="/Projects">
-            <button className="border-2 border-black p-2 m-4 w-20 rounded-lg hover:bg-green-500 active:bg-green-600 focus:bg-green-600 focus:ring focus:ring-yellow-500">
-              Projects
-            </button>
-          </NavLink>
-          <NavLink to="/Contact">
-            <button className="border-2 border-black p-2 m-4 w-20 rounded-lg hover:bg-yellow-500 active:bg-yellow-600 focus:bg-yellow-600 focus:ring focus:ring-blue-500">
-              Contact
-            </button>
-          </NavLink>
-          <NavLink to="/Scuba">
-            <button className="border-2 border-black p-2 m-4 w-20 rounded-lg hover:bg-blue-500 active:bg-blue-600 focus:bg-blue-600 focus:ring focus:ring-purple-500">
-              Scuba
-            </button>
-          </NavLink>
-          <NavLink to="/Videos">
-            <button className="border-2 border-black p-2 m-4 w-20 rounded-lg hover:bg-purple-500 active:bg-purple-600 focus:bg-purple-600 focus:ring focus:ring-orange-500">
-              Videos
-            </button>
-          </NavLink>
-          <NavLink to="/Music">
-            <button className="border-2 border-black p-2 m-4 w-20 rounded-lg hover:bg-orange-500 active:bg-orange-600 focus:bg-orange-600 focus:ring focus:ring-red-500">
-              Music
-            </button>
-          </NavLink>
-        </div>
-      </nav>
-  )
+        ))}
+      </div>
+      <BiMenuAltRight className="text-black text-3xl lg:hidden" />
+
+      {/* <MobileNavBar ref={refMobileNavBar}/> */}
+    </nav>
+  );
 }
