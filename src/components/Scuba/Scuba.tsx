@@ -7,6 +7,7 @@ export function Scuba() {
         autoPlay
         loop
         muted
+        playsInline
       />
       <h1 className="text-center text-white">This Page is a work in Progress</h1>
     </div>
