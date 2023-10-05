@@ -16,7 +16,7 @@
   left: 0;
 }
 .linkhover::before {
-  background-color: #54b3d6;
+  background-color: #0a1fdf;
   height: 2px;
   bottom: 0;
   transform-origin: 100% 50%;
@@ -30,7 +30,7 @@
   transform-origin: 100% 50%;
   transform: translate3d(200%, 0, 0);
   transition: transform .5s cubic-bezier(0.76, 0, 0.24, 1);
-  color: #54b3d6;
+  color: #0a1fdf;
 }
 
 .linkhover:hover::before {
