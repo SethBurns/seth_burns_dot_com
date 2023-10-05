@@ -24,9 +24,10 @@ export function About({
         <video
           src="./assets/PeacefulCanal.mp4"
           className="brightness-75 -z-10 bg-center object-cover w-screen h-screen fixed top-0 left-0"
-          autoPlay
+          autoPlay={true}
           loop
           muted
+          playsInline
         />
         <AboutMe
           setHeight={setHeight}
