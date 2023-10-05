@@ -11,7 +11,6 @@ import { useEffect, useState } from 'react';
 function App() {
   const [scrollValue, setScrollValue] = useState(0);
   const [height, setHeight] = useState(0);
-  const [page, setPage] = useState('About');
 
   useEffect(() => {
     const scrollHandler = () => {
@@ -25,14 +24,16 @@ function App() {
       }
     };
     window.addEventListener('scroll', scrollHandler);
-    return () => {window.removeEventListener('scroll', scrollHandler)};
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', scrollHandler)
+    };
+  }, [height]);
 
   return (
-    <div className="h-screen w-screen font-syne">
+    <div className="h-full w-full font-syne">
       <Navbar />
-      <main className="h-screen w-screen">
-        <Routes>
+      <main className="h-full w-full">
+        <Routes >
           <Route
             path="/"
             element={

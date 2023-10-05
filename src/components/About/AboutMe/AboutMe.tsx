@@ -20,7 +20,7 @@ export function AboutMe({
 
   useEffect(() => {
     const maxScroll = height - windowHeight + 84;
-    const maxTop = height - imageHeight - 64;
+    const maxTop = height - imageHeight - 134;
     const scrollRatio = maxTop / maxScroll;
     const roundRatio = imageHeight / 2 / maxScroll;
     if (scrollValue >= 0 && scrollValue <= maxScroll) {
@@ -34,23 +34,39 @@ export function AboutMe({
       setTop(0);
       setRound(0);
     }
-    console.log(scrollValue);
+    console.log(scrollValue, maxScroll, imageHeight);
   }, [scrollValue, height, windowHeight, imageHeight]);
 
   useEffect(() => {
-    setHeight(sliderHeight.current?.clientHeight || 0);
-    setImageHeight(image.current?.clientHeight || 0);
-  }, []);
+    const resizeHandler = () => {
+      console.log('resizeMount');
+      setHeight(sliderHeight.current?.clientHeight || 0);
+      setImageHeight(image.current?.clientHeight || 256);
+    };
+    window.addEventListener('load', resizeHandler)
+    window.addEventListener('resize', resizeHandler);
+    // window.addEventListener('navigate', resizeHandler)
+    return () => {
+      window.removeEventListener('resize', resizeHandler);
+      window.removeEventListener('load', resizeHandler);
+      // window.removeEventListener('navigate', resizeHandler);
+      console.log('resizeUnmount');
+    };
+  }, [
+    sliderHeight.current?.clientHeight,
+    image.current?.clientHeight,
+    setHeight, setImageHeight,
+  ]);
 
   return (
     <div ref={sliderHeight} className="flex flex-col justify-between">
-      <h2 className="text-2xl text-center">Hi! I'm Seth.</h2>
+      <h2 className="text-2xl text-center bg-transparentWhite p-2 rounded">Hi! I'm Seth.</h2>
       <div className="h-full flex justify-center">
         <img
           ref={image}
           style={{
             borderRadius: `${round}px`,
-            top: `${top + 116}px`,
+            top: `${top + 140}px`,
             position: 'absolute',
           }}
           src="./assets/SethProfile.png"
@@ -58,7 +74,7 @@ export function AboutMe({
           className="w-36 h-36 lg:w-64 lg:h-64 object-cover object-center border-4 border-blue-700"
         />
       </div>
-      <h2 className="text-2xl">And I'm well rounded.</h2>
+      <h2 className="text-2xl text-center bg-transparentWhite p-2 rounded">And I'm well rounded.</h2>
     </div>
   );
 }

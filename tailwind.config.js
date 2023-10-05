@@ -5,14 +5,16 @@ module.exports = {
     './node_modules/tw-elements/dist/js/**/*.js',
   ],
   theme: {
-    colors: {
-      transparentWhite: '#555fff9c',
-    },
     fontFamily: {
       syne: ['Syne', 'sans-serif']
     },
     extend: {
       scroll: 'var(--scroll)',
+      colors: {
+        transparentWhite: '#ffffff59',
+        tgray: '#b8b8b880',
+        tdgray: '#7a7a7a80',
+      },
     },
   },
   //@ts-ignore
