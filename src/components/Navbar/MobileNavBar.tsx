@@ -1,15 +1,31 @@
 import { NavLink } from "react-router-dom";
 import {IoMdClose} from 'react-icons/io';
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-export const MobileNavBar = () => {
+interface Props {
+  mobileMenuOpen: Boolean;
+  toggleMobileMenu: Function;
+}
 
+export const MobileNavBar = ({mobileMenuOpen, toggleMobileMenu}: Props) => {
+  
+  const [open, setOpen] = useState<String>('hidden');
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      setOpen('absolute top-0 right-0 bg-transparentWhite rounded-lg m-2');
+    } else {
+      setOpen('hidden');
+    }
+  }, [mobileMenuOpen])
 
   return (
-    <div className="h-screen w-screen bg-black absolute top-0 left-0 z-20">
-      <div className="flex justify-center">
+    <div className={`${open}`}>
+      <IoMdClose className='text-black text-3xl fixed right-2' onClick={() => toggleMobileMenu()}/>
+      <div className="flex flex-col justify-center pt-4" onClick={() => toggleMobileMenu()}>
         {[
           ['About', '/'],
+          ['Projects', '/Projects'],
           ['Contact', '/Contact'],
           ['Scuba', '/Scuba'],
           ['Videos', '/Videos'],
@@ -17,13 +33,12 @@ export const MobileNavBar = () => {
         ].map(([title, path]) => (
           <NavLink to={path} key={title}>
             <button
-              className="p-2 m-4 w-20 rounded-lg"
+              className="p-2 m-4 w-20 rounded-lg linkhover bg-eggshell"
             >
               {title}
             </button>
           </NavLink>))}
       </div>
-      <IoMdClose className='text-black absolute top-4 right-4 text-3xl'/>
     </div>
   );
 }
