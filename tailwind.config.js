@@ -14,6 +14,8 @@ module.exports = {
         transparentWhite: '#ffffff59',
         tgray: '#b8b8b880',
         tdgray: '#7a7a7a80',
+        eggshell: '#f5f5f5',
+        grey: '#71717a'
       },
     },
   },
