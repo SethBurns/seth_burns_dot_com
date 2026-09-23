@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import useWindowDimensions from '../../util/helperFunctions';
 
 export function AboutMe({
@@ -13,14 +13,27 @@ export function AboutMe({
   const [top, setTop] = useState(0);
   const [round, setRound] = useState(0);
   const [imageHeight, setImageHeight] = useState(0);
-  const { windowWidth, windowHeight } = useWindowDimensions();
+  const { windowHeight } = useWindowDimensions();
 
   const sliderHeight = useRef<HTMLDivElement>(null);
   const image = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
+    // The image starts beneath the heading until both elements have dimensions.
+    // The old calculation used a negative scroll range on the first render,
+    // placing the image at the top of the page until a later load event.
+    if (height === 0 || imageHeight === 0) {
+      setTop(0);
+      setRound(0);
+      return;
+    }
     const maxScroll = height - windowHeight + 84;
     const maxTop = height - imageHeight - 134;
+    if (maxScroll <= 0) {
+      setTop(0);
+      setRound(0);
+      return;
+    }
     const scrollRatio = maxTop / maxScroll;
     const roundRatio = imageHeight / 2 / maxScroll;
     if (scrollValue >= 0 && scrollValue <= maxScroll) {
@@ -34,29 +47,23 @@ export function AboutMe({
       setTop(0);
       setRound(0);
     }
-    console.log(scrollValue, maxScroll, imageHeight);
   }, [scrollValue, height, windowHeight, imageHeight]);
 
-  useEffect(() => {
-    const resizeHandler = () => {
-      console.log('resizeMount');
+  useLayoutEffect(() => {
+    const measure = () => {
       setHeight(sliderHeight.current?.clientHeight || 0);
-      setImageHeight(image.current?.clientHeight || 256);
+      setImageHeight(image.current?.clientHeight || 0);
     };
-    window.addEventListener('load', resizeHandler)
-    window.addEventListener('resize', resizeHandler);
-    // window.addEventListener('navigate', resizeHandler)
+    measure();
+    const observer = new ResizeObserver(measure);
+    if (sliderHeight.current) observer.observe(sliderHeight.current);
+    if (image.current) observer.observe(image.current);
+    window.addEventListener('resize', measure);
     return () => {
-      window.removeEventListener('resize', resizeHandler);
-      window.removeEventListener('load', resizeHandler);
-      // window.removeEventListener('navigate', resizeHandler);
-      console.log('resizeUnmount');
+      observer.disconnect();
+      window.removeEventListener('resize', measure);
     };
-  }, [
-    sliderHeight.current?.clientHeight,
-    image.current?.clientHeight,
-    setHeight, setImageHeight,
-  ]);
+  }, [setHeight]);
 
   return (
     <div ref={sliderHeight} className="flex flex-col justify-between">
