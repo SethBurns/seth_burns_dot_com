@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { AboutMe } from './AboutMe/AboutMe';
 import { Technologies } from './Technologies/Technologies';
 
@@ -11,12 +11,7 @@ export function About({
   setHeight: Function;
   height: number;
 }) {
-  const [scrollHeight, setScrollHeight] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setScrollHeight(ref.current?.clientHeight || 0);
-  }, []);
 
   return (
     <section ref={ref}>
